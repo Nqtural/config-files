@@ -1,0 +1,12 @@
+#!/usr/bin/env fish
+
+set mem_info (free -m | awk '/^Mem:/ {print $3, $2}')
+set mem_used (echo $mem_info | awk '{print $1}')
+set mem_total (echo $mem_info | awk '{print $2}')
+set mem_pct (math "100 * $mem_used / $mem_total")
+
+if test $mem_pct -lt 90
+    printf "^c#2874b6^ ^c#d5dbc5^%.0f%% (%sMiB)" $mem_pct $mem_used
+else
+    printf "^c#b11b20^ %.0f%% (%sMiB)^c#d5dbc5^" $mem_pct $mem_used
+end

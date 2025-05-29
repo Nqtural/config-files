@@ -1,0 +1,16 @@
+#!/usr/bin/env fish
+
+set line (wpctl get-volume @DEFAULT_AUDIO_SINK@)
+set percent (math -s 0 "$(echo $line | awk '{print $2}') * 100")
+if string match -q "*MUTED*" -- $line
+    printf "^c#b11b20^  (%s%%)^c#d5dbc5^" $percent
+else
+    if test $percent -lt 30
+        printf "^c#2874b6^ "
+    else if test $percent -lt 70
+        printf "^c#2874b6^ "
+    else
+        printf "^c#2874b6^ "
+    end
+    printf "^c#d5dbc5^ %s%%" $percent
+end

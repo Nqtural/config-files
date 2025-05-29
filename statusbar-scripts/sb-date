@@ -1,0 +1,2 @@
+#!/bin/env fish
+printf "^c#2874b6^󰥔 ^c#d5dbc5^%s" (date "+%b %d, %H:%M:%S")

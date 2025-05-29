@@ -1,0 +1,75 @@
+#!/usr/bin/env fish
+
+set battery (cat /sys/class/power_supply/BAT0/capacity)
+set bat_status (cat /sys/class/power_supply/BAT0/status)
+set charge_now (cat /sys/class/power_supply/BAT0/charge_now)
+set charge_full (cat /sys/class/power_supply/BAT0/charge_full)
+set current_now (cat /sys/class/power_supply/BAT0/current_now)
+
+# Select icon based on battery percentage
+if test $battery -lt 5
+    set icon "󰂎"
+else if test $battery -lt 15
+    set icon "󰁺"
+else if test $battery -lt 26
+    set icon "󰁻"
+else if test $battery -lt 35
+    set icon "󰁼"
+else if test $battery -lt 45
+    set icon "󰁽"
+else if test $battery -lt 55
+    set icon "󰁾"
+else if test $battery -lt 65
+    set icon "󰁿"
+else if test $battery -lt 75
+    set icon "󰂀"
+else if test $battery -lt 85
+    set icon "󰂁"
+else if test $battery -lt 95
+    set icon "󰂂"
+else
+    set icon "󰁹"
+end
+
+set time ""
+if test $bat_status = "Charging"
+    set remaining (math "($charge_full - $charge_now) / $current_now")
+    set seconds (math "$remaining * 3600")
+    set hours (math "floor($seconds / 3600)")
+    set minutes (math "floor(($seconds % 3600) / 60)")
+    if test $hours -gt 0
+        set time "$hours""h $minutes""m"
+    else
+        set time "$minutes""m"
+    end
+    printf "^c#2874b6^%s󱐋 ^c#d5dbc5^%s%% (%s)" $icon $battery $time
+else if test $bat_status = "Discharging"
+    set remaining (math "$charge_now / $current_now")
+    set seconds (math "$remaining * 3600")
+    set hours (math "floor($seconds / 3600)")
+    set minutes (math "floor(($seconds % 3600) / 60)")
+    if test $hours -gt 0
+        set time "$hours""h $minutes""m"
+    else
+        set time "$minutes""m"
+    end
+    if test $battery -lt 5
+        printf "^c#b11b20^%s %s%% (%s)^c#d5dbc5^" $icon $battery $time
+    else
+        printf "^c#2874b6^%s ^c#d5dbc5^%s%% (%s)" $icon $battery $time
+    end
+else
+    if test $battery -eq 100
+        if test $current_now -gt 0
+            printf "^c#2874b6^%s ^c#d5dbc5^%s%% (full)" $icon $battery
+        else
+            printf "^c#2874b6^󱐋%s ^c#d5dbc5^%s%% (full)" $icon $battery
+        end
+    else
+        if test $current_now -gt 0
+            printf "^c#2874b6^%s ^c#d5dbc5^%s%% (estimating...)" $icon $battery
+        else
+            printf "^c#2874b6^󱐋%s ^c#d5dbc5^%s%% (estimating...)" $icon $battery
+        end
+    end
+end

@@ -1,0 +1,38 @@
+#!/usr/bin/env fish
+
+# Ethernet
+set eth_if (ip -o link show | awk -F': ' '/^[0-9]+: (enp|eth)/ {print $2}' | head -n1)
+set eth_status ""
+if test -n "$eth_if"
+    set eth_status (ip link show $eth_if | grep "state UP")
+end
+
+if test -n "$eth_status"
+    set eth_ip (ip -4 -o addr show $eth_if | awk '{print $4}' | cut -d'/' -f1)
+    printf "^c#2874b6^󰈀 ^c#d5dbc5^%s" $ethernet_icon $eth_ip
+    exit 0
+end
+
+# WiFi
+set wifi_if (ip -o link show | grep -E 'wl' | awk -F': ' '{print $2}' | head -n1)
+set ssid (nmcli -t -f active,ssid dev wifi | grep "yes" | awk -F ":" '{print $2}')
+
+if test -n "$wifi_if" -a -n "$ssid"
+    set strength (nmcli -t -f IN-USE,SIGNAL dev wifi | grep '^\*' | cut -d: -f2)
+    if test $strength -lt 20
+        set icon "󰤯 "
+    else if test $strength -lt 40
+        set icon "󰤟 "
+    else if test $strength -lt 60
+        set icon "󰤢 "
+    else if test $strength -lt 80
+        set icon "󰤥 "
+    else
+        set icon "󰤨 "
+    end
+    printf "^c#2874b6^$icon^c#d5dbc5^%s\n" $ssid
+    exit 0
+end
+
+# Disconnected
+printf "^c#b11b20^󰖪 Disconnected^c#d5dbc5^" $wifi_off_icon

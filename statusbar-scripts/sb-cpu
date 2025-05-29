@@ -1,0 +1,25 @@
+#!/usr/bin/env fish
+
+set cpu1 (cat /proc/stat | awk '/^cpu / {print $2+$4, $2+$4+$5}')
+sleep 1
+set cpu2 (cat /proc/stat | awk '/^cpu / {print $2+$4, $2+$4+$5}')
+
+set u1 (echo $cpu1 | awk '{print $1}')
+set t1 (echo $cpu1 | awk '{print $2}')
+set u2 (echo $cpu2 | awk '{print $1}')
+set t2 (echo $cpu2 | awk '{print $2}')
+
+set cpu_pct (math "100 * ($u2 - $u1) / ($t2 - $t1)")
+
+# Read CPU temperature in Celsius (adjust path if needed)
+if test -f /sys/class/thermal/thermal_zone0/temp
+    set cpu_temp (math "$(cat /sys/class/thermal/thermal_zone0/temp) / 1000")
+else
+    set cpu_temp "N/A"
+end
+
+if test $cpu_pct -lt 90
+    printf "^c#2874b6^ ^c#d5dbc5^%.0f%% (%.0f°C)" $cpu_pct $cpu_temp
+else
+    printf "^c#b11b20^ %.0f%% (%.0f°C)^c#d5dbc5^" $cpu_pct $cpu_temp
+end
