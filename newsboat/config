@@ -1,0 +1,103 @@
+# Colors {{{
+
+#                           foreground  background  attributes
+color background            color7      default
+color listnormal            color7      default
+color listfocus             color15     color8      bold
+color listnormal_unread     color6      default
+color listfocus_unread      color14     color8      bold
+color title                 color13     default     bold
+color info                  color13     default     bold
+color hint-key              color5      default     bold
+color hint-keys-delimiter   color5      default
+color hint-separator        color5      default
+color hint-description      color5      default
+color article               color15     default
+color end-of-text-marker    color8      default     bold
+
+# }}}
+
+# Keybinds {{{
+
+# Unbind some defaults
+unbind-key J
+unbind-key K
+unbind-key ^K
+unbind-key C
+unbind-key Q
+unbind-key q
+unbind-key N
+
+# Dialogs available:
+#   all (default)
+#   feedlist
+#   filebrowser
+#   help
+#   articlelist
+#   article
+#   tagselection
+#   filterselection
+#   urlview
+#   podboat
+#   dirbrowser
+#   searchresultslist
+
+# Bind keys
+#           key     operation           dialog
+bind-key    h       quit                all
+bind-key    j       down                all
+bind-key    k       up                  all
+bind-key    l       open                all
+bind-key    q       hard-quit           all
+bind-key    SPACE   macro-prefix        all
+bind-key    a       toggle-article-read all
+
+# Unbind keys in some dialogs
+#           key dialog      reason
+#unbind-key  h   feedlist    # do not allow fully quitting with 'h'
+
+# Macros
+#       key command                                                 -- description
+macro   m   set browser "mpv"
+macro   f   set browser "$XDG_CONFIG_HOME/newsboat/scripts/feh.sh"
+
+# }}}
+
+# Layout and View {{{
+
+articlelist-format          "%3i │ %D │ %?T?|%-17T|?%t"
+articlelist-title-format    "%T: %u unread%?F? matching filter '%F'&?"
+auto-reload                 no
+datetime-format             "%d/%m %R"
+display-article-progress    yes
+feed-sort-order             lastupdated
+feedlist-format             "%3i │ %11u │ %t"
+feedlist-title-format       "%?F?Feeds&Feeds:? %u unread%?F? matching filter '%F'&?%?T? - tag '%T'&?"
+itemview-title-format       "'%T' from feed %F"
+notify-always               no
+notify-format               "%d new article(s) in %D feed(s)!"
+notify-program              "notify-send"
+scrolloff                   3
+show-keymap-hint            no
+swap-title-and-hints        yes
+text-width                  80
+
+# Highlight header of article
+highlight   article "^Feed: .*"                 color1  default
+highlight   article "^Title: .*"                color3  default
+highlight   article "^Author: .*"               color2  default
+highlight   article "^Date: .*"                 color6  default
+highlight   article "^Link: .*"                 color4  default
+highlight   article "^Podcast Download URL: .*" color5  default
+
+# }}}
+
+# Miscellaneous {{{
+
+# Browser
+browser "mpv"
+
+# Behavior
+toggleitemread-jumps-to-next-unread yes
+
+# }}}

@@ -1,0 +1,29 @@
+super + Return
+	kitty
+
+super + b
+	firefox
+
+super + d
+	dmenu_run
+
+shift + F{3,4}
+    brightnessctl set 5%{-,+} && notify-brightness.fish
+
+shift + alt + F{3,4}
+    redshift.fish {down,up}
+
+shift + F{5,6,7}
+    volume.fish {mute,down,up}
+
+Print
+    maim "$HOME/pictures/screenshots/$(date "+%y%m%d-%H-%M-%S").png"
+
+shift + Print
+    maim -u | xclip -sel c -t image/png
+
+ctrl + Print
+    maim -us "$HOME/pictures/screenshots/$(date "+%y%m%d-%H-%M-%S").png"
+
+ctrl + shift + Print
+    maim -us | xclip -sel c -t image/png

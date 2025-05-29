@@ -1,0 +1,6 @@
+alias l="eza --icons"
+alias ls="eza --icons"
+alias la="eza -a --icons"
+alias ll="eza -a1 --icons"
+alias lt="eza -aT -L 3 --icons"
+alias n="newsboat -q"

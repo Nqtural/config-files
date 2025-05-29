@@ -1,0 +1,2 @@
+# required by github-cli (argument)
+=dev-util/github-cli-2.72.0 ~amd64
