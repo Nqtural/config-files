@@ -45,6 +45,8 @@ unbind-key N
 # Bind keys
 #           key     operation           dialog
 bind-key    h       quit                all
+bind-key    LEFT    quit                all
+bind-key    RIGHT   open                all
 bind-key    j       down                all
 bind-key    k       up                  all
 bind-key    l       open                all
