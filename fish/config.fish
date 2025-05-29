@@ -5,7 +5,6 @@ set -U fish_greeting
 
 # Editor
 set -gx EDITOR /usr/bin/nvim
-set -x PATH .local/bin/:$PATH
 
 # }}}
 
