@@ -1,8 +1,16 @@
+# Global variables {{{
+
 # Greeting
 set -U fish_greeting
+
 # Editor
 set -gx EDITOR /usr/bin/nvim
 set -x PATH .local/bin/:$PATH
+
+# }}}
+
+# Prompt {{{
+
 # Prompt Git functions
 function check_untracked_files
     set -l untracked_files (git ls-files --others --exclude-standard)
@@ -20,6 +28,7 @@ function check_git_changes
         return 1
     end
 end
+
 # Prompt
 set tty_device (tty)
 if string match -q "/dev/tty*" $tty_device
@@ -86,12 +95,24 @@ function fish_prompt_normal
     	printf " "
     end
 end
+
+# }}}
+
+# XDG {{{
+
 # Base XDG
 set -x XDG_CACHE_HOME "$HOME/.cache"
 set -x XDG_CONFIG_HOME "$HOME/.config"
 set -x XDG_DATA_HOME "$HOME/.local/share"
+
 # Cargo XDG
 set -x CARGO_HOME "$XDG_DATA_HOME/cargo"
 
-# Aliases
+# }}}
+
+# Aliases {{{
+
+# Aliases file
 source /etc/fish/aliases.fish
+
+# }}}
