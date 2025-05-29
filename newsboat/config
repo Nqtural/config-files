@@ -58,8 +58,9 @@ bind-key    a       toggle-article-read all
 
 # Macros
 #       key command                                                 -- description
-macro   m   set browser "mpv"
-macro   f   set browser "$XDG_CONFIG_HOME/newsboat/scripts/feh.sh"
+macro   v   set browser "mpv"
+macro   i   set browser "$XDG_CONFIG_HOME/newsboat/scripts/feh.sh"
+macro   b   set browser "firefox --new-tab"
 
 # }}}
 
