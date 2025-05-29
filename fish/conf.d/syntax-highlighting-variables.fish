@@ -54,30 +54,30 @@ set fish_color_history_current brwhite
 # Pager {{{
 
 # The progress bar at the bottom left corner
-set fish_pager_color_progress
+set fish_pager_color_progress white
 # The background color of a line
-set fish_pager_color_background
+set fish_pager_color_background --background=normal
 # The prefix string, i.e. the string that is to be completed
-set fish_pager_color_prefix
+set fish_pager_color_prefix white
 # The completion itself, i.e. the proposed rest of the string
-set fish_pager_color_completion
+set fish_pager_color_completion white
 # The completion description
-set fish_pager_color_description
+set fish_pager_color_description white
 # Background of the selected completion
-set fish_pager_color_selected_background
+set fish_pager_color_selected_background --background=normal
 # Prefix of the selected completion
-set fish_pager_color_selected_prefix
+set fish_pager_color_selected_prefix cyan
 # Suffix of the selected completion
-set fish_pager_color_selected_completion
+set fish_pager_color_selected_completion brcyan --bold
 # Description of the selected completion
-set fish_pager_color_selected_description
+set fish_pager_color_selected_description white
 # Background of every second unselected completion
-set fish_pager_color_secondary_background
+set fish_pager_color_secondary_background --background=normal
 # Prefix of every second unselected completion
-set fish_pager_color_secondary_prefix
+set fish_pager_color_secondary_prefix white
 # Suffix of every second unselected completion
-set fish_pager_color_secondary_completion
+set fish_pager_color_secondary_completion white
 # Description of every second unselected completion
-set fish_pager_color_secondary_description
+set fish_pager_color_secondary_description white
 
 # }}}
